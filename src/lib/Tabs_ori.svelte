@@ -7,7 +7,7 @@
   import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
   import { btnStyle, subBtnStyle, footBtnStyle } from "./style.js";
   import { ori_items } from "./word/wordList_endGame.js";
-  import InfiniteScroll from "./func/InfiniteScroll.svelte";
+  import InfiniteScroll from "../com/func/InfiniteScroll.svelte";
 
   //
 

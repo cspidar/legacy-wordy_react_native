@@ -4,10 +4,10 @@
   import { flip } from "svelte/animate";
   import { onMount, afterUpdate, beforeUpdate } from "svelte";
 
-  import { refresh, icon_list, icon_yet, icon_know } from "./icons.js";
-  import { btnStyle, subBtnStyle, footBtnStyle } from "./style.js";
-  import { ori_items } from "./word/wordList_endGame.js";
-  import InfiniteScroll from "./func/InfiniteScroll.svelte";
+  import { refresh, icon_list, icon_yet, icon_know } from "./lib/icons.js";
+  import { btnStyle, subBtnStyle, footBtnStyle } from "./lib/style.js";
+  import { ori_items } from "./lib/word/wordList_endGame.js";
+  import InfiniteScroll from "./com/InfiniteScroll.svelte";
 
   //
 
