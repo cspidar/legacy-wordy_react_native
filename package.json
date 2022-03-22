@@ -1,6 +1,6 @@
 {
-  "name": "movword",
-  "version": "0.0.0",
+  "name": "wordy",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
