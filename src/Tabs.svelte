@@ -4,12 +4,18 @@
   import { flip } from "svelte/animate";
   import { onMount, afterUpdate, beforeUpdate } from "svelte";
 
-  import { refresh, icon_list, icon_yet, icon_know } from "./lib/icons.js";
+  import {
+    icon_refresh,
+    icon_list,
+    icon_menu,
+    icon_yet,
+    icon_know,
+  } from "./lib/icons.js";
   import { btnStyle, subBtnStyle, footBtnStyle } from "./lib/style.js";
   import { ori_items } from "./lib/word/wordList_endGame.js";
   import InfiniteScroll from "./com/InfiniteScroll.svelte";
-
-  //
+  import Drawer from "svelte-drawer-component";
+  import DrawerTitle from "./com/DrawerTitle.svelte";
 
   export let tabs = [
     { label: "Checks", icon: icon_list, value: 1 },
@@ -184,11 +190,52 @@
   });
 
   // console.log("scriptEnd");
+
+  let open = false;
+  function toggleDrawer() {
+    open = !open;
+  }
 </script>
+
+<!-- <DrawerMenu /> -->
+
+<Drawer size="80%" {open} on:clickAway={() => (open = false)}>
+  <!-- <div class="grid-cols-2">
+    <div class="absolute left-8 top-5 text-2xl border-b-2">Wordy: movies</div>
+    <button
+      on:click={() => (open = false)}
+      class="ml-2 mr-4 rotate-90 hover:rotate-180 active:scale-110 active:rotate-180 transition-all ease-in-out duration-300 absolute right-2 top-6 "
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="inline-block h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d={icon_menu}
+        />
+      </svg></button
+    >
+  </div> -->
+  <DrawerTitle stats={() => toggleDrawer()} icon={icon_menu} />
+
+  <div class="absolute top-20 left-8 space-y-4">
+    <div class="{btnStyle} text-xl w-80">menu 1</div>
+    <div class="{btnStyle} text-xl w-80">menu 1</div>
+    <div class="{btnStyle} text-xl w-80">menu 1</div>
+    <div class="{btnStyle} text-xl w-80">menu 1</div>
+    <div class="{btnStyle} text-xl w-80">menu 1</div>
+  </div>
+  <div class="absolute bottom-2 right-4">version 1.0.0</div>
+</Drawer>
 
 <div class="topTabs w-screen fixed top-0 left-0 right-0 z-50 backdrop-blur">
   <ul class="justify-center mt-2 text-l text-slate-700">
-    <button
+    <!-- <button
       class="mr-2 hover:scale-90 active:scale-90 active:-rotate-180 transition-all ease-in-out duration-300"
       on:click={refreshList}
       ><svg
@@ -202,10 +249,29 @@
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d={refresh}
+          d={icon_refresh}
+        />
+      </svg>
+    </button> -->
+    <button
+      on:click={() => (open = true)}
+      class="ml-2 mr-4 hover:-rotate-90 active:scale-110 active:-rotate-90 transition-all ease-in-out duration-300"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="inline-block h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d={icon_menu}
         />
       </svg>
     </button>
+
     {#each tabs as tab}
       <li class={activeTabValue === tab.value ? "active" : ""}>
         <span class="tabs" on:click={handleClick(tab.value)}>
@@ -502,7 +568,6 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
   }
-
   span.tabs:hover {
     border-color: #e9ecef #e9ecef #dee2e6;
   }
