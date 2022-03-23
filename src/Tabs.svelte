@@ -14,8 +14,10 @@
   import { btnStyle, subBtnStyle, footBtnStyle } from "./lib/style.js";
   import { ori_items } from "./lib/word/wordList_endGame.js";
   import InfiniteScroll from "./com/InfiniteScroll.svelte";
+  import Icon from "./com/Icon.svelte";
   import Drawer from "svelte-drawer-component";
   import DrawerTitle from "./com/DrawerTitle.svelte";
+  import DrawerMenu from "./com/DrawerMenu.svelte";
 
   export let tabs = [
     { label: "Checks", icon: icon_list, value: 1 },
@@ -191,44 +193,26 @@
 
   // console.log("scriptEnd");
 
+  // Drawer Open
   let open = false;
-  function toggleDrawer() {
-    open = !open;
-  }
 </script>
 
 <!-- <DrawerMenu /> -->
 
-<Drawer size="80%" {open} on:clickAway={() => (open = false)}>
-  <!-- <div class="grid-cols-2">
-    <div class="absolute left-8 top-5 text-2xl border-b-2">Wordy: movies</div>
-    <button
-      on:click={() => (open = false)}
-      class="ml-2 mr-4 rotate-90 hover:rotate-180 active:scale-110 active:rotate-180 transition-all ease-in-out duration-300 absolute right-2 top-6 "
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="inline-block h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d={icon_menu}
-        />
-      </svg></button
-    >
-  </div> -->
-  <DrawerTitle stats={() => toggleDrawer()} icon={icon_menu} />
+<Drawer size="25rem" {open} on:clickAway={() => (open = false)}>
+  <DrawerTitle>
+    <p slot="title">Wordy: movies</p>
+    <span slot="btn" on:click={() => (open = false)}>
+      <Icon icon={icon_menu} />
+    </span>
+  </DrawerTitle>
 
   <div class="absolute top-20 left-8 space-y-4">
-    <div class="{btnStyle} text-xl w-80">menu 1</div>
-    <div class="{btnStyle} text-xl w-80">menu 1</div>
-    <div class="{btnStyle} text-xl w-80">menu 1</div>
-    <div class="{btnStyle} text-xl w-80">menu 1</div>
-    <div class="{btnStyle} text-xl w-80">menu 1</div>
+    <DrawerMenu>Compo menu</DrawerMenu>
+    <DrawerMenu>Compo menu 1</DrawerMenu>
+    <DrawerMenu>Compo menu 2</DrawerMenu>
+    <DrawerMenu>Compo menu 3</DrawerMenu>
+    <DrawerMenu>Compo menu 4</DrawerMenu>
   </div>
   <div class="absolute bottom-2 right-4">version 1.0.0</div>
 </Drawer>
@@ -238,57 +222,20 @@
     <!-- <button
       class="mr-2 hover:scale-90 active:scale-90 active:-rotate-180 transition-all ease-in-out duration-300"
       on:click={refreshList}
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="inline-block h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d={icon_refresh}
-        />
-      </svg>
+      <Icon icon={icon_refresh} />
     </button> -->
     <button
       on:click={() => (open = true)}
       class="ml-2 mr-4 hover:-rotate-90 active:scale-110 active:-rotate-90 transition-all ease-in-out duration-300"
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="inline-block h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d={icon_menu}
-        />
-      </svg>
+    >
+      <Icon icon={icon_menu} />
     </button>
 
     {#each tabs as tab}
       <li class={activeTabValue === tab.value ? "active" : ""}>
         <span class="tabs" on:click={handleClick(tab.value)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="inline h-6 w-6"
-            fill="none"
-            viewBox="2 2 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d={tab.icon}
-            />
-          </svg>
+          <Icon icon={tab.icon} />
           {tab.label}
         </span>
       </li>
