@@ -199,7 +199,7 @@
 
 <!-- <DrawerMenu /> -->
 
-<Drawer size="25rem" {open} on:clickAway={() => (open = false)}>
+<Drawer size="22rem" {open} on:clickAway={() => (open = false)}>
   <DrawerTitle>
     <p slot="title">Wordy: movies</p>
     <span slot="btn" on:click={() => (open = false)}>
@@ -208,7 +208,7 @@
   </DrawerTitle>
 
   <div class="absolute top-20 left-8 space-y-4">
-    <DrawerMenu>Compo menu</DrawerMenu>
+    <DrawerMenu>Compo menu 3</DrawerMenu>
     <DrawerMenu>Compo menu 1</DrawerMenu>
     <DrawerMenu>Compo menu 2</DrawerMenu>
     <DrawerMenu>Compo menu 3</DrawerMenu>
@@ -227,7 +227,7 @@
     </button> -->
     <button
       on:click={() => (open = true)}
-      class="ml-2 mr-4 hover:-rotate-90 active:scale-110 active:-rotate-90 transition-all ease-in-out duration-300"
+      class="ml-1 mr-2 hover:-rotate-90 active:scale-110 active:-rotate-90 transition-all ease-in-out duration-300"
     >
       <Icon icon={icon_menu} />
     </button>
