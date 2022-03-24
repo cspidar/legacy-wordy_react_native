@@ -498,7 +498,7 @@
     border-bottom: 1px solid #dee2e6;
   }
   li {
-    width: 30vw;
+    width: 28vw;
     margin-bottom: -1px;
     text-align: center;
     font-weight: 700;
