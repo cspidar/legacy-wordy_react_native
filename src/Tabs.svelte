@@ -15,9 +15,11 @@
   import { ori_items } from "./lib/word/wordList_endGame.js";
   import InfiniteScroll from "./com/InfiniteScroll.svelte";
   import Icon from "./com/Icon.svelte";
+
   import Drawer from "svelte-drawer-component";
   import DrawerTitle from "./com/DrawerTitle.svelte";
   import DrawerMenu from "./com/DrawerMenu.svelte";
+  import RotateButton from "./com/RotateButton.svelte";
 
   export let tabs = [
     { label: "Checks", icon: icon_list, value: 1 },
@@ -131,6 +133,7 @@
   }
   loadStatus();
 
+  // 상태 업데이트를 위한 재할당 및 함수 분리
   function updateKnows() {
     let toKnow = checks.shift();
     knows = [...knows, toKnow];
@@ -138,7 +141,6 @@
     checks = [...checks, toCheck];
     selected = checks[0].word;
   }
-
   function updateYets() {
     let toYet = checks.shift();
     yets = [...yets, toYet];
@@ -146,7 +148,6 @@
     checks = [...checks, toCheck];
     selected = checks[0].word;
   }
-
   function updateYetToKnows(index) {
     let toKnow = show_yets[index];
     knows = [...knows, toKnow];
@@ -155,7 +156,6 @@
     yets = [...yets1, ...yets2];
     show_yets.splice(index, 1);
   }
-
   function updateKnowsToYet(index) {
     let toYet = show_knows[index];
     yets = [...yets, toYet];
@@ -165,14 +165,7 @@
     show_knows.splice(index, 1);
   }
 
-  // function updateKnowsToYet(index) {
-  //   let toYet = knows[index];
-  //   yets = [...yets, toYet];
-  //   let knows1 = knows.slice(0, index);
-  //   let knows2 = knows.slice(index + 1);
-  //   knows = [...knows1, ...knows2];
-  // }
-
+  // 버튼 상태
   let yetBtnStatus = {};
   function yetBtnToggle(index) {
     !yetBtnStatus[index]
@@ -208,8 +201,13 @@
   </DrawerTitle>
 
   <div class="absolute top-20 left-8 space-y-4">
-    <DrawerMenu>Compo menu 3</DrawerMenu>
-    <DrawerMenu>Compo menu 1</DrawerMenu>
+    <DrawerMenu>Compo menu 4</DrawerMenu>
+    <DrawerMenu>
+      <button on:click={refreshList}>
+        <Icon icon={icon_refresh} />
+        초기화
+      </button>
+    </DrawerMenu>
     <DrawerMenu>Compo menu 2</DrawerMenu>
     <DrawerMenu>Compo menu 3</DrawerMenu>
     <DrawerMenu>Compo menu 4</DrawerMenu>
@@ -217,20 +215,13 @@
   <div class="absolute bottom-2 right-4">version 1.0.0</div>
 </Drawer>
 
-<div class="topTabs w-screen fixed top-0 left-0 right-0 z-50 backdrop-blur">
-  <ul class="justify-center mt-2 text-l text-slate-700">
-    <!-- <button
-      class="mr-2 hover:scale-90 active:scale-90 active:-rotate-180 transition-all ease-in-out duration-300"
-      on:click={refreshList}
-      >
-      <Icon icon={icon_refresh} />
-    </button> -->
-    <button
-      on:click={() => (open = true)}
-      class="ml-1 mr-2 hover:-rotate-90 active:scale-110 active:-rotate-90 transition-all ease-in-out duration-300"
-    >
-      <Icon icon={icon_menu} />
-    </button>
+<div class="topTabs w-screen fixed top-0 left-0 right-0 z-50 ">
+  <ul class="justify-center mt-2 text-l text-slate-700 ">
+    <RotateButton>
+      <button on:click={() => (open = true)}>
+        <Icon icon={icon_menu} />
+      </button>
+    </RotateButton>
 
     {#each tabs as tab}
       <li class={activeTabValue === tab.value ? "active" : ""}>
@@ -277,7 +268,7 @@
                       <div class="mb-2">
                         <div
                           class="flex {btnStyle} grid text-lg {i === 0
-                            ? 'bg-slate-100 text-slate-900 border-slate-500 border-4'
+                            ? 'bg-slate-100 text-slate-900 border-4 border-slate-700'
                             : ''}"
                           in:fly|local={{ duration: 300 }}
                           out:fade|local={{ duration: 100 }}
@@ -498,10 +489,11 @@
     border-bottom: 1px solid #dee2e6;
   }
   li {
-    width: 28vw;
+    width: 29vw;
     margin-bottom: -1px;
     text-align: center;
     font-weight: 700;
+    font-size: 0.9rem;
   }
   /* .topTabs {
     overflow-x: hidden;
