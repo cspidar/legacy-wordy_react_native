@@ -267,8 +267,9 @@
                     <div class="block text-left " transition:slide|local>
                       <div class="mb-2">
                         <div
-                          class="flex {btnStyle} grid text-lg {i === 0
-                            ? 'bg-slate-100 text-slate-900 border-4 border-slate-700'
+                          class="flex {btnStyle} grid text-lg drop-shadow-md {i ===
+                          0
+                            ? 'bg-slate-100 text-slate-900 border-slate-700 border FirstChkItem'
                             : ''}"
                           in:fly|local={{ duration: 300 }}
                           out:fade|local={{ duration: 100 }}
@@ -540,5 +541,8 @@
     height: 94vh;
     padding-top: 1vh;
     padding-bottom: 5vh;
+  }
+  .ChkItem {
+    border: 2px;
   }
 </style>
