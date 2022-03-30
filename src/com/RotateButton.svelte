@@ -3,9 +3,6 @@
 </script>
 
 <button
-  on:click={() => {
-    func;
-  }}
   class="ml-1 mr-3 hover:-rotate-90 active:scale-110 active:-rotate-90 transition-all ease-in-out duration-300"
 >
   <slot />
